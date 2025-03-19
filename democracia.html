@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolución de la Democracia</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @page {
+            size: 279.4mm 431.8mm;
+            /* Equivalente a 11 x 17 pulgadas */
+            margin: 0;
+        }
+
+        body {
+            width: 240mm;
+            /* Aumentado de 210mm */
+            height: 297mm;
+            margin: 0 auto;
+            padding: 10mm;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .timeline-container {
+            position: relative;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b, #10b981);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .timeline-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 8px;
+            text-align: left;
+            border: 1px solid #e5e7eb;
+        }
+
+        .comparison-table th {
+            background-color: #e5e7eb;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100">
+    <div class="max-w-full mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+        <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4">
+            <h1 class="text-2xl font-bold text-center">Las Etapas Clave de la Democracia y Formas Alternativas de
+                Gobierno</h1>
+        </header>
+
+        <!-- Línea del tiempo interactiva -->
+        <section class="p-4">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-blue-500 pb-2">Evolución Histórica de
+                la Democracia (Click en las Etapas)</h2>
+
+            <div class="timeline-container mt-8 mb-16 px-4">
+                <div class="timeline-line"></div>
+
+                <div class="flex justify-between">
+                    <!-- Democracia Directa -->
+                    <div class="timeline-item w-1/5 px-2" onclick="openModal('modal-1')">
+                        <div
+                            class="bg-blue-500 h-10 w-10 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">
+                            1</div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-blue-700">Democracia Directa</h3>
+                            <p class="text-sm text-gray-600">Siglo V a.C.</p>
+                        </div>
+                    </div>
+
+                    <!-- Democracia Representativa -->
+                    <div class="timeline-item w-1/5 px-2" onclick="openModal('modal-2')">
+                        <div
+                            class="bg-purple-500 h-10 w-10 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">
+                            2</div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-purple-700">Democracia Representativa</h3>
+                            <p class="text-sm text-gray-600">Siglo XVIII</p>
+                        </div>
+                    </div>
+                    <!-- Monarquía Absoluta -->
+                    <div class="timeline-item w-1/5 px-2" onclick="openModal('modal-4')">
+                        <div
+                            class="bg-yellow-500 h-10 w-10 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">
+                            4</div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-yellow-700">Monarquía Absoluta</h3>
+                            <p class="text-sm text-gray-600">Siglos XVI-XVIII</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Democracia Liberal -->
+                    <div class="timeline-item w-1/5 px-2" onclick="openModal('modal-3')">
+                        <div
+                            class="bg-pink-500 h-10 w-10 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">
+                            3</div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-pink-700">Democracia Liberal</h3>
+                            <p class="text-sm text-gray-600">Siglos XVIII-XIX</p>
+                        </div>
+                    </div>
+
+
+                    <!-- Aristocracia -->
+                    <div class="timeline-item w-1/5 px-2" onclick="openModal('modal-5')">
+                        <div
+                            class="bg-green-500 h-10 w-10 rounded-full mx-auto mb-2 flex items-center justify-center text-white font-bold">
+                            5</div>
+                        <div class="text-center">
+                            <h3 class="font-bold text-green-700">Aristocracia</h3>
+                            <p class="text-sm text-gray-600">Diversos períodos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modales para la línea del tiempo -->
+        <div id="modal-1" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('modal-1')">&times;</span>
+                <h3 class="text-xl font-bold text-blue-700 mb-2">Democracia Directa</h3>
+                <p class="text-sm text-gray-600 mb-2">Siglo V a.C.</p>
+                <div class="bg-blue-50 p-3 rounded-lg">
+                    <p class="text-gray-800 mb-2">Surgió en Atenas durante el siglo V a.C. y es considerada el primer
+                        modelo democrático de la historia.</p>
+                    <h4 class="font-semibold text-blue-700 mt-2">Características principales:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>La Asamblea Popular (Ekklesía):</strong> Todos los ciudadanos varones mayores de 20
+                            años podían participar en debates y votaciones sobre leyes y políticas.</li>
+                        <li><strong>El Consejo de los 500 (Boule):</strong> Preparaba las propuestas legislativas que se
+                            discutían en la Asamblea. Sus miembros eran seleccionados por sorteo.</li>
+                        <li><strong>Los tribunales populares (Dikasteria):</strong> Los ciudadanos actuaban como jurados
+                            en casos legales.</li>
+                    </ul>
+                    <h4 class="font-semibold text-blue-700 mt-2">Limitaciones:</h4>
+                    <p class="text-gray-800">Aunque innovadora, la democracia ateniense excluía a mujeres, esclavos y
+                        extranjeros, lo que limitaba significativamente la participación ciudadana.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-2" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('modal-2')">&times;</span>
+                <h3 class="text-xl font-bold text-purple-700 mb-2">Democracia Representativa</h3>
+                <p class="text-sm text-gray-600 mb-2">Siglo XVIII</p>
+                <div class="bg-purple-50 p-3 rounded-lg">
+                    <p class="text-gray-800 mb-2">Surgió como respuesta a la necesidad de gobernar sociedades más
+                        grandes y complejas. Se consolidó durante la Ilustración y las revoluciones del siglo XVIII.</p>
+                    <h4 class="font-semibold text-purple-700 mt-2">Orígenes:</h4>
+                    <p class="text-gray-800">Inspirada en las ideas de filósofos como John Locke y Montesquieu, se basa
+                        en la soberanía popular y la separación de poderes.</p>
+                    <h4 class="font-semibold text-purple-700 mt-2">Ejemplos históricos:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>Revolución Americana (1776):</strong> Estableció un sistema democrático basado en la
+                            representación y los derechos individuales.</li>
+                        <li><strong>Revolución Francesa (1789):</strong> Promovió la igualdad, la libertad y la
+                            soberanía popular.</li>
+                    </ul>
+                    <h4 class="font-semibold text-purple-700 mt-2">Características:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li>Elecciones periódicas</li>
+                        <li>Sufragio (aunque inicialmente limitado)</li>
+                        <li>Creación de parlamentos o congresos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-3" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('modal-3')">&times;</span>
+                <h3 class="text-xl font-bold text-pink-700 mb-2">Democracia Liberal</h3>
+                <p class="text-sm text-gray-600 mb-2">Siglos XVIII-XIX</p>
+                <div class="bg-pink-50 p-3 rounded-lg">
+                    <p class="text-gray-800 mb-2">Combina la democracia representativa con la protección de derechos
+                        individuales, consolidándose como el modelo predominante en los siglos XVIII y XIX.</p>
+                    <h4 class="font-semibold text-pink-700 mt-2">Principios clave:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>Soberanía popular:</strong> El poder reside en el pueblo.</li>
+                        <li><strong>Estado de derecho:</strong> Las leyes garantizan la igualdad y la libertad.</li>
+                        <li><strong>Derechos individuales:</strong> Libertad de expresión, asociación y propiedad.</li>
+                    </ul>
+                    <h4 class="font-semibold text-pink-700 mt-2">Hitos históricos:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>Declaración de los Derechos del Hombre y del Ciudadano (1789):</strong> Estableció
+                            los derechos fundamentales en Francia.</li>
+                        <li><strong>Expansión del sufragio universal:</strong> Aunque inicialmente limitado a hombres,
+                            marcó un avance hacia la inclusión.</li>
+                    </ul>
+                    <h4 class="font-semibold text-pink-700 mt-2">Impacto:</h4>
+                    <p class="text-gray-800">Sentó las bases para los sistemas democráticos actuales, equilibrando la
+                        participación ciudadana con la protección de derechos fundamentales.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-4" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('modal-4')">&times;</span>
+                <h3 class="text-xl font-bold text-yellow-700 mb-2">Monarquía Absoluta</h3>
+                <p class="text-sm text-gray-600 mb-2">Siglos XVI-XVIII</p>
+                <div class="bg-yellow-50 p-3 rounded-lg">
+                    <p class="text-gray-800 mb-2">En este sistema, el poder reside completamente en un monarca, quien
+                        gobierna sin restricciones legales o constitucionales.</p>
+                    <h4 class="font-semibold text-yellow-700 mt-2">Características:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li>Concentración total del poder en el monarca</li>
+                        <li>Ausencia de participación ciudadana</li>
+                        <li>Legitimidad basada en el derecho divino o la tradición</li>
+                    </ul>
+                    <h4 class="font-semibold text-yellow-700 mt-2">Ejemplos históricos:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>Luis XIV de Francia:</strong> Representó el absolutismo en su máxima expresión ("El
+                            Estado soy yo").</li>
+                        <li><strong>Zares de Rusia:</strong> Gobernaron con poder absoluto hasta principios del siglo
+                            XX.</li>
+                    </ul>
+                    <h4 class="font-semibold text-yellow-700 mt-2">Comparación con la democracia:</h4>
+                    <p class="text-gray-800">La monarquía absoluta carece de participación ciudadana y separación de
+                        poderes, elementos esenciales en la democracia. Mientras que la democracia busca la igualdad, la
+                        monarquía absoluta se basa en jerarquías rígidas.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-5" class="modal">
+            <div class="modal-content">
+                <span class="close-button" onclick="closeModal('modal-5')">&times;</span>
+                <h3 class="text-xl font-bold text-green-700 mb-2">Aristocracia</h3>
+                <p class="text-sm text-gray-600 mb-2">Diversos períodos</p>
+                <div class="bg-green-50 p-3 rounded-lg">
+                    <p class="text-gray-800 mb-2">La aristocracia es un sistema en el que el poder está en manos de una
+                        élite, generalmente basada en la nobleza o en méritos específicos.</p>
+                    <h4 class="font-semibold text-green-700 mt-2">Características:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li>Gobierno de una minoría considerada "virtuosa" o "superior"</li>
+                        <li>Exclusión de la mayoría de la población de la toma de decisiones</li>
+                        <li>Enfoque en la estabilidad y la tradición</li>
+                    </ul>
+                    <h4 class="font-semibold text-green-700 mt-2">Ejemplos históricos:</h4>
+                    <ul class="list-disc pl-5 text-gray-800">
+                        <li><strong>Antigua Grecia:</strong> Algunas polis eran gobernadas por aristócratas antes de la
+                            democracia.</li>
+                        <li><strong>Europa medieval:</strong> El poder estaba concentrado en la nobleza.</li>
+                        <li><strong>Venecia medieval:</strong> Gobernada por un consejo de nobles comerciantes.</li>
+                    </ul>
+                    <h4 class="font-semibold text-green-700 mt-2">Comparación con la democracia:</h4>
+                    <p class="text-gray-800">La democracia promueve la igualdad y la participación de todos los
+                        ciudadanos, mientras que la aristocracia limita el poder a una élite. La aristocracia prioriza
+                        la estabilidad y la continuidad, mientras que la democracia fomenta el cambio a través de la
+                        voluntad popular.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cuadro comparativo -->
+        <section class="p-4">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-purple-500 pb-2">Cuadro Comparativo de
+                Sistemas de Gobierno</h2>
+
+            <div class="overflow-x-auto">
+                <table class="comparison-table w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="w-1/6">Características</th>
+                            <th class="bg-blue-100">Democracia Directa</th>
+                            <th class="bg-purple-100">Democracia Representativa</th>
+                            <th class="bg-pink-100">Democracia Liberal</th>
+                            <th class="bg-yellow-100">Monarquía Absoluta</th>
+                            <th class="bg-green-100">Aristocracia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-semibold">Participación ciudadana</td>
+                            <td>Directa, sin intermediarios</td>
+                            <td>A través de representantes electos</td>
+                            <td>A través de representantes con garantía de derechos</td>
+                            <td>Nula o muy limitada</td>
+                            <td>Limitada a una élite</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Concentración del poder</td>
+                            <td>Distribuido entre ciudadanos</td>
+                            <td>Distribuido entre representantes</td>
+                            <td>Separación de poderes</td>
+                            <td>Total en el monarca</td>
+                            <td>En manos de una minoría privilegiada</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Base de legitimidad</td>
+                            <td>Voluntad popular directa</td>
+                            <td>Elecciones periódicas</td>
+                            <td>Constitución y derechos</td>
+                            <td>Derecho divino o tradición</td>
+                            <td>Mérito o linaje noble</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Inclusión</td>
+                            <td>Limitada (excluía mujeres, esclavos y extranjeros)</td>
+                            <td>Inicialmente limitada, luego ampliada</td>
+                            <td>Amplia, con protección de minorías</td>
+                            <td>Muy baja</td>
+                            <td>Baja, basada en clase social</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Ejemplo histórico</td>
+                            <td>Atenas, siglo V a.C.</td>
+                            <td>EE.UU. tras independencia</td>
+                            <td>Democracias occidentales modernas</td>
+                            <td>Francia de Luis XIV</td>
+                            <td>Venecia medieval</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Toma de decisiones</td>
+                            <td>Votación directa en asambleas</td>
+                            <td>A través de órganos legislativos electos</td>
+                            <td>Órganos legislativos con control constitucional</td>
+                            <td>Decretos del monarca</td>
+                            <td>Consejos de nobles o élites</td>
+                        </tr>
+                        <tr>
+                            <td class="font-semibold">Derechos individuales</td>
+                            <td>Limitados a ciudadanos</td>
+                            <td>Reconocidos pero variables</td>
+                            <td>Garantizados constitucionalmente</td>
+                            <td>Sujetos a voluntad del monarca</td>
+                            <td>Privilegios según estatus</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Análisis conclusivo -->
+        <section class="p-4 mb-4">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 border-b-2 border-pink-500 pb-2">Análisis Profundo</h2>
+
+            <div class="bg-gray-50 p-4 rounded-lg shadow-inner">
+                <p class="text-gray-800 mb-3">La evolución de la democracia representa un viaje fascinante hacia la
+                    inclusión y la protección de derechos fundamentales. Desde sus inicios en la Antigua Grecia, donde
+                    se limitaba a un grupo selecto de ciudadanos varones, hasta las democracias liberales modernas que
+                    buscan garantizar la participación universal, observamos un progresivo reconocimiento del valor de
+                    la voz ciudadana.</p>
+
+                <p class="text-gray-800 mb-3">Los sistemas alternativos como la monarquía absoluta y la aristocracia,
+                    aunque proporcionaron estabilidad en ciertos contextos históricos, fracasaron en adaptarse a las
+                    demandas de sociedades cada vez más complejas y conscientes de sus derechos. La concentración del
+                    poder en una sola persona o en una élite privilegiada resultó insostenible frente a las aspiraciones
+                    de igualdad y libertad.</p>
+
+                <p class="text-gray-800">La democracia, a pesar de sus imperfecciones y desafíos constantes, ha
+                    demostrado ser el sistema más resiliente y adaptable. Su capacidad para evolucionar —desde la
+                    participación directa hasta la representación con garantías constitucionales— refleja su
+                    flexibilidad ante las necesidades cambiantes de las sociedades. El equilibrio entre la voluntad
+                    popular y la protección de derechos individuales sigue siendo el gran logro de este sistema, que
+                    continúa perfeccionándose en busca de una mayor inclusión y justicia social.</p>
+            </div>
+        </section>
+
+        <footer class="bg-gray-800 text-white p-2 text-center text-xs">
+            <p>© 2025 - Hamlet Solano - Enfoque De Genero - Revisión histórica de la democracia
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // Funciones para manejar los modales
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera del contenido
+        window.onclick = function (event) {
+            const modals = document.getElementsByClassName('modal');
+            for (let i = 0; i < modals.length; i++) {
+                if (event.target == modals[i]) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        }
+
+        // Cerrar modal con la tecla Escape
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                const modals = document.getElementsByClassName('modal');
+                for (let i = 0; i < modals.length; i++) {
+                    modals[i].style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
